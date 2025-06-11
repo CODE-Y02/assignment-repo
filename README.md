@@ -8,6 +8,7 @@
 ## Note
 
 I have done minimal changes to ui & theres lot more we can improve jut I just focused on completing task first.
+Also you wont find .env files here in this Public repo. 
 
 ## Required:
 
