@@ -131,7 +131,12 @@ const Topbar = ({ view, setView, setIsFiltered, isFiltered }) => {
           </div>
         )}
       </div>
-      <CreateUser open={open} scroll={scroll} setOpen={setOpen} />
+      <CreateUser
+        open={open}
+        scroll={scroll}
+        setOpen={setOpen}
+        role={showClientTopBar ? "client" : "employee"}
+      />
       <Filter
         open={openFilters}
         setOpen={setOpenFilters}
