@@ -128,6 +128,14 @@ const Topbar = ({ view, setView, setIsFiltered, isFiltered }) => {
                 />
               </FormControl>
             </div>
+
+            <Tooltip title="Add New Client" placement="top" arrow>
+              <div onClick={handleCreateopen("body")}>
+                <button className="bg-primary-red hover:bg-red-400 transition-all text-white w-[44px] h-[44px] flex justify-center items-center rounded-full shadow-xl">
+                  <Add />
+                </button>
+              </div>
+            </Tooltip>
           </div>
         )}
       </div>
