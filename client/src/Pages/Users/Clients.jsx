@@ -9,7 +9,7 @@ import { Tooltip, styled } from "@mui/material";
 import { PiDotsThreeOutlineThin, PiTrashLight } from "react-icons/pi";
 import { IoOpenOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
-import { Dropdown, Menu, MenuButton, MenuItem, menuItemClasses } from "@mui/base";
+import { MenuItem, menuItemClasses } from "@mui/base";
 import Filter from "./Filter";
 import User from "./User";
 import DeleteClient from "./Delete";
@@ -49,9 +49,13 @@ const StyledListbox = styled("ul")(
       overflow: auto;
       outline: 0px;
       background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-      border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+      border: 1px solid ${
+        theme.palette.mode === "dark" ? grey[700] : grey[200]
+      };
       color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-      box-shadow: 0px 4px 30px ${theme.palette.mode === "dark" ? grey[900] : grey[200]};
+      box-shadow: 0px 4px 30px ${
+        theme.palette.mode === "dark" ? grey[900] : grey[200]
+      };
       z-index: 1;
       `
 );
@@ -68,8 +72,12 @@ const StyledMenuItem = styled(MenuItem)(
       }
     
       &.${menuItemClasses.focusVisible} {
-        outline: 3px solid ${theme.palette.mode === "dark" ? blue[600] : blue[200]};
-        background-color: ${theme.palette.mode === "dark" ? grey[800] : grey[100]};
+        outline: 3px solid ${
+          theme.palette.mode === "dark" ? blue[600] : blue[200]
+        };
+        background-color: ${
+          theme.palette.mode === "dark" ? grey[800] : grey[100]
+        };
         color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
       }
     
@@ -78,7 +86,9 @@ const StyledMenuItem = styled(MenuItem)(
       }
     
       &:hover:not(.${menuItemClasses.disabled}) {
-        background-color: ${theme.palette.mode === "dark" ? grey[800] : grey[100]};
+        background-color: ${
+          theme.palette.mode === "dark" ? grey[800] : grey[100]
+        };
         color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
       }
       `
@@ -87,7 +97,9 @@ const StyledMenuItem = styled(MenuItem)(
 const Clients = () => {
   ////////////////////////////////////// VARIABLES /////////////////////////////////////
   const dispatch = useDispatch();
-  const { clients, isFetching, error, loggedUser } = useSelector((state) => state.user);
+  const { clients, isFetching, error, loggedUser } = useSelector(
+    (state) => state.user
+  );
   const columns = [
     {
       field: "uid",
@@ -116,21 +128,27 @@ const Clients = () => {
       headerName: "Client Username",
       headerClassName: "super-app-theme--header",
       width: "200",
-      renderCell: (params) => <div className="capitalize font-primary">{params.row.username}</div>,
+      renderCell: (params) => (
+        <div className="capitalize font-primary">{params.row.username}</div>
+      ),
     },
     {
       field: "phone",
       headerName: "Phone",
       headerClassName: "super-app-theme--header",
       width: "150",
-      renderCell: (params) => <div className="font-primary">{params.row.phone}</div>,
+      renderCell: (params) => (
+        <div className="font-primary">{params.row.phone}</div>
+      ),
     },
     {
       field: "email",
       headerName: "Email",
       headerClassName: "super-app-theme--header",
       width: "220",
-      renderCell: (params) => <div className="font-primary">{params.row?.email}</div>,
+      renderCell: (params) => (
+        <div className="font-primary">{params.row?.email}</div>
+      ),
     },
     {
       field: "action",
@@ -139,8 +157,7 @@ const Clients = () => {
       headerClassName: "super-app-theme--header",
       renderCell: (params) => (
         <div className="flex gap-[10px]">
-          {
-            loggedUser?.role != 'employee' &&
+          {loggedUser?.role != "employee" && (
             <Tooltip placement="top" title="Delete" arrow>
               {" "}
               <PiTrashLight
@@ -148,7 +165,7 @@ const Clients = () => {
                 className="cursor-pointer text-red-500 text-[23px] hover:text-red-400"
               />
             </Tooltip>
-          }
+          )}
         </div>
       ),
     },
@@ -163,11 +180,9 @@ const Clients = () => {
 
   ////////////////////////////////////// USE EFFECTS ////////////////////////////////////
   useEffect(() => {
-    loggedUser.role == 'employee'
-      ?
-      dispatch(getEmployeeClients())
-      :
-      dispatch(getClients());
+    loggedUser.role == "employee"
+      ? dispatch(getEmployeeClients())
+      : dispatch(getClients());
   }, []);
 
   ////////////////////////////////////// FUNCTIONS //////////////////////////////////////////
@@ -185,12 +200,16 @@ const Clients = () => {
 
   return (
     <div className="w-full">
-
-      <DeleteClient open={openDeleteModal} setOpen={setOpenDeleteModal} userId={selectedUserId} />
+      <DeleteClient
+        open={openDeleteModal}
+        setOpen={setOpenDeleteModal}
+        userId={selectedUserId}
+      />
       <Filter open={openFilters} setOpen={setOpenFilters} />
       <User open={openUser} setOpen={setOpenUser} />
 
       <Topbar />
+
       <Table
         rows={clients}
         columns={columns}
