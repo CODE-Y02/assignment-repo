@@ -62,7 +62,9 @@ const StyledListbox = styled("ul")(
     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
     border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-    box-shadow: 0px 4px 30px ${theme.palette.mode === "dark" ? grey[900] : grey[200]};
+    box-shadow: 0px 4px 30px ${
+      theme.palette.mode === "dark" ? grey[900] : grey[200]
+    };
     z-index: 1;
     `
 );
@@ -78,8 +80,12 @@ const StyledMenuItem = styled(MenuItem)(
     }
     
     &.${menuItemClasses.focusVisible} {
-      outline: 3px solid ${theme.palette.mode === "dark" ? blue[600] : blue[200]};
-      background-color: ${theme.palette.mode === "dark" ? grey[800] : grey[100]};
+      outline: 3px solid ${
+        theme.palette.mode === "dark" ? blue[600] : blue[200]
+      };
+      background-color: ${
+        theme.palette.mode === "dark" ? grey[800] : grey[100]
+      };
       color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     }
   
@@ -88,7 +94,9 @@ const StyledMenuItem = styled(MenuItem)(
     }
   
     &:hover:not(.${menuItemClasses.disabled}) {
-      background-color: ${theme.palette.mode === "dark" ? grey[800] : grey[100]};
+      background-color: ${
+        theme.palette.mode === "dark" ? grey[800] : grey[100]
+      };
       color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     }
     `
@@ -129,23 +137,37 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
   };
 
   return (
-    <div className={`${pathname.includes('/client/') || pathname.includes('download') ? 'invisible' : 'visible'}`}>
+    <div
+      className={`${
+        pathname.includes("/client/") || pathname.includes("download")
+          ? "invisible"
+          : "visible"
+      }`}
+    >
       <div
-        className={`flex flex-col z-10 sticky top-0 w-full sm:h-[4rem] h-[4rem] bg-white border-b-[1px] border-b-[#eeeff0] font-primary`}>
+        className={`flex flex-col z-10 sticky top-0 w-full sm:h-[4rem] h-[4rem] bg-white border-b-[1px] border-b-[#eeeff0] font-primary`}
+      >
         <div
-          className={`sm:h-full h-[4rem] md:pl-[20px] sm:pl-[1rem] pl-[8px] flex items-center justify-between sm:border-none border-b-[1px] border-[#eeeff0] sm:shadow-none`}>
+          className={`sm:h-full h-[4rem] md:pl-[20px] sm:pl-[1rem] pl-[8px] flex items-center justify-between sm:border-none border-b-[1px] border-[#eeeff0] sm:shadow-none`}
+        >
           {/* left section */}
           <div className={`flex justify-start gap-[10px] items-center`}>
             <IconButton
               onClick={() => setShowSidebar((pre) => !pre)}
               className={`md:hidden flex cursor-pointer hover:text-sky-400 ${pathname.includes(
                 "/settings" ? "hidden" : ""
-              )}`}>
+              )}`}
+            >
               <PiList className="text-[25px]" />
             </IconButton>
-            <div>
-              <p className="text-sky-400 text-xl gap-1 flex items-center">
-                <PiTimerLight className="text-[25px]" /> {date.toLocaleTimeString()}
+            <div className="flex gap-[10px] items-center">
+              <p className="text-sky-400 text-xl gap-1 flex items-center w-28">
+                <PiTimerLight className="text-[25px]" />
+                {date.toLocaleTimeString()}
+              </p>
+
+              <p className="bg-orange-600 text-white font-semibold px-2 py-1 rounded-full">
+                {Intl.DateTimeFormat().resolvedOptions().timeZone}
               </p>
             </div>
           </div>
@@ -154,20 +176,20 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
           <div className="flex gap-[20px] ">
             {/* icons */}
             <div className="sm:flex items-center hidden gap-[10px] ">
-
               {/* Notification */}
-              {
-                loggedUser.role != 'employee' &&
+              {loggedUser.role != "employee" && (
                 <Dropdown>
                   <MenuButton>
                     <Tooltip title="Notifications" arrow placement="bottom">
                       <IconButton
                         className="h-fit hover:text-sky-400 inline-block relative"
                         size="small"
-                        aria-label="menu">
+                        aria-label="menu"
+                      >
                         <PiBell
-                          className={`text-[25px] animate-none ${notifications.length > 0 ? "text-sky-400" : ""
-                            }`}
+                          className={`text-[25px] animate-none ${
+                            notifications.length > 0 ? "text-sky-400" : ""
+                          }`}
                         />
                         {notifications.length > 0 && (
                           <span className="animate-ping absolute top-1.5 right-2 block h-1 w-1 rounded-full ring-2 ring-sky-400 bg-sky-600"></span>
@@ -181,27 +203,35 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
                         <div className="w-full bg-sky-400 font-primary text-2xl text-white p-4">
                           Notifications
                         </div>
-                        {notifications.slice(0, 5).map((notification, index) => (
-                          <React.Fragment key={index}>
-                            <StyledMenuItem
-                              onClick={() => navigate("/authorization/refund")}
-                              className="text-gray-600 flex items-center gap-2">
-                              <div>
-                                <Avatar />
-                              </div>
-                              <div className="font-primary">
-                                <span className="text-lg font-light text-sky-400 font-primary">
-                                  {notification.title}
-                                </span>
-                                <br />
-                                {notification.description}
-                                <br />
-                              </div>
-                            </StyledMenuItem>
-                          </React.Fragment>
-                        ))}
+                        {notifications
+                          .slice(0, 5)
+                          .map((notification, index) => (
+                            <React.Fragment key={index}>
+                              <StyledMenuItem
+                                onClick={() =>
+                                  navigate("/authorization/refund")
+                                }
+                                className="text-gray-600 flex items-center gap-2"
+                              >
+                                <div>
+                                  <Avatar />
+                                </div>
+                                <div className="font-primary">
+                                  <span className="text-lg font-light text-sky-400 font-primary">
+                                    {notification.title}
+                                  </span>
+                                  <br />
+                                  {notification.description}
+                                  <br />
+                                </div>
+                              </StyledMenuItem>
+                            </React.Fragment>
+                          ))}
                         {notifications.length > 5 && (
-                          <Link to="/notifications" className="hover:underline text-blue-500 ">
+                          <Link
+                            to="/notifications"
+                            className="hover:underline text-blue-500 "
+                          >
                             More
                           </Link>
                         )}
@@ -216,12 +246,16 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
                     )}
                   </Menu>
                 </Dropdown>
-              }
+              )}
 
               <Dropdown>
                 <MenuButton>
                   <Tooltip title="Your Tasks" arrow placement="bottom">
-                    <IconButton className="h-fit hover:text-sky-400" size="small" aria-label="menu">
+                    <IconButton
+                      className="h-fit hover:text-sky-400"
+                      size="small"
+                      aria-label="menu"
+                    >
                       <PiAlarm className="text-[25px] font-bold" />
                     </IconButton>
                   </Tooltip>
@@ -231,7 +265,9 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
                     <React.Fragment key={index}>
                       <StyledMenuItem className="text-gray-600 flex">
                         <div>
-                          <span className="text-lg font-light text-sky-400">{task.title}</span>
+                          <span className="text-lg font-light text-sky-400">
+                            {task.title}
+                          </span>
                           <br />
                           {task.description}
                           <br />
@@ -240,7 +276,10 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
                     </React.Fragment>
                   ))}
                   {tasks.length > 5 && (
-                    <Link to="/tasks" className="hover:underline text-blue-500 ">
+                    <Link
+                      to="/tasks"
+                      className="hover:underline text-blue-500 "
+                    >
                       More
                     </Link>
                   )}
@@ -249,7 +288,11 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
 
               <Link to="/tasks">
                 <Tooltip title="Add Task" arrow placement="bottom">
-                  <IconButton className="h-fit hover:text-sky-400" size="small" aria-label="menu">
+                  <IconButton
+                    className="h-fit hover:text-sky-400"
+                    size="small"
+                    aria-label="menu"
+                  >
                     <PiListChecks className="text-[25px]" />
                   </IconButton>
                 </Tooltip>
@@ -257,7 +300,11 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
 
               <Link to="/employees">
                 <Tooltip title="Add Employee" arrow placement="bottom">
-                  <IconButton className="h-fit hover:text-sky-400" size="small" aria-label="menu">
+                  <IconButton
+                    className="h-fit hover:text-sky-400"
+                    size="small"
+                    aria-label="menu"
+                  >
                     <PiUserPlus className="text-[25px]" />
                   </IconButton>
                 </Tooltip>
@@ -267,27 +314,38 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
             <div className="flex items-center border-l-[1px] border-l-[#eeeff0] hover:bg-gray-100">
               <Dropdown>
                 <MenuButton>
-                  <Tooltip className="flex items-center" title="Profile" arrow placement="bottom">
+                  <Tooltip
+                    className="flex items-center"
+                    title="Profile"
+                    arrow
+                    placement="bottom"
+                  >
                     <Avatar className="m-3 cursor-pointer capitalize ">
                       {loggedUser?.username[0]}
                     </Avatar>
-                    <span className="capitalize pr-3">{loggedUser?.username}</span>
+                    <span className="capitalize pr-3">
+                      {loggedUser?.username}
+                    </span>
                   </Tooltip>
                 </MenuButton>
 
                 <Menu slots={{ listbox: StyledListbox }}>
                   <div className="p-2 flex justify-center items-center">
-                    <div className="text-lg font-primary">{loggedUser?.username}</div>
+                    <div className="text-lg font-primary">
+                      {loggedUser?.username}
+                    </div>
                   </div>
                   <Divider />
                   <StyledMenuItem
                     onClick={handleLogout}
-                    className="text-gray-600 flex items-center gap-4 font-primary">
+                    className="text-gray-600 flex items-center gap-4 font-primary"
+                  >
                     <PiSignOutLight className="text-xl" /> Logout
                   </StyledMenuItem>
                   <StyledMenuItem
                     onClick={handleChangePasswordOpen}
-                    className="text-gray-600 flex items-center gap-4 font-primary">
+                    className="text-gray-600 flex items-center gap-4 font-primary"
+                  >
                     <PiKeyLight className="text-xl" /> Change Password
                   </StyledMenuItem>
                 </Menu>
@@ -297,7 +355,10 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
         </div>
       </div>
 
-      <ChangePassword open={openPasswordChange} setOpen={setOpenPasswordChange} />
+      <ChangePassword
+        open={openPasswordChange}
+        setOpen={setOpenPasswordChange}
+      />
     </div>
   );
 };
